@@ -1,0 +1,153 @@
+{
+    "general":{
+        "name": "Apple Inc.",
+        "ticker": "AAPL",
+        "price": "175"
+    },
+    "timeSeries":[
+        {
+        "datetime": "2023-05-25",
+        "close": "173.01500"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.01500"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.03000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "172.95000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "172.94000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.17000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.32500"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.30499"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.33000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.40900"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.56599"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.59500"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.74001"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.80000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.76500"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.77200"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.75999"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.81990"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.74010"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.66000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.74001"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.75000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.78000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.74500"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.70000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.71001"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.66000"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.78999"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.72501"
+        },
+        {
+        "datetime": "2023-05-25",
+        "close": "173.66000"
+        }
+    ],
+    "keyMetrics":{
+        "open": "value",
+        "high": "value",
+        "low": "value",
+        "volume": "value",
+        "prevClose": "value",
+        "fiftytwolow": "value",
+        "fiftytwohigh": "value",
+        "change": "value"
+    },
+    "news": [
+        {
+            "title": "Your Digital Self: Elon Musk and others may try, but controlling AI is an impossible mission",
+            "description": "Surely we can survive the advent of AI? Don’t answer that question.",
+            "url": "https://www.marketwatch.com/story/elon-musk-and-others-may-try-but-controlling-ai-is-an-impossible-mission-acbe80f6",
+            "urlToImage": "https://images.mktw.net/im-444184/social"
+        },
+        {
+            "title": "Your Digital Self: Elon Musk and others may try, but controlling AI is an impossible mission",
+            "description": "Surely we can survive the advent of AI? Don’t answer that question.",
+            "url": "https://www.marketwatch.com/story/elon-musk-and-others-may-try-but-controlling-ai-is-an-impossible-mission-acbe80f6",
+            "urlToImage": "https://images.mktw.net/im-444184/social"
+        }
+    ]
+}

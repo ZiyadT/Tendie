@@ -4,7 +4,7 @@ import {timeSeries} from '../sample_data/stocksample'
 import './components.css';
 
 export default function Chart(props) {
-    const [data, setData] = useState(timeSeries)
+    const [data, setData] = useState(props.data)
     const [filter, setFilter] = useState('1D')
 
     return (
