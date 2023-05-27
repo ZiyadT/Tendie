@@ -11,7 +11,7 @@ async function retrieve(req, res){
     let news = []
     let finalResult = {}
     
-    let response = await fetch(`https://api.twelvedata.com/time_series?symbol=${req.body.stock}&interval=1min&apikey=${process.env.STOCK_API_KEY}`)
+    let response = await fetch(`https://api.twelvedata.com/time_series?symbol=${req.body.stock}&interval=1day&apikey=${process.env.STOCK_API_KEY}`)
     let json = await response.json();
 
     for(let i = 0; i < json.values.length; i++){
@@ -20,7 +20,7 @@ async function retrieve(req, res){
             emptyObj.value = json.values[i].close
             timeSeries.push(emptyObj)
     }
-    finalResult['timeSeries'] = timeSeries
+    finalResult['timeSeries'] = timeSeries.reverse()
 
     response = await fetch(`https://api.twelvedata.com/quote?symbol=${req.body.stock}&apikey=${process.env.STOCK_API_KEY}`)
     json = await response.json();
@@ -38,7 +38,7 @@ async function retrieve(req, res){
     finalResult['general'] = general
     finalResult['keyMetrics'] = keyMetrics
 
-    response = await fetch(`https://newsapi.org/v2/everything?q=${req.body.stock}&pageSize=10&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`)
+    response = await fetch(`https://newsapi.org/v2/everything?q=${json.name}&pageSize=10&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`)
     json = await response.json();
 
     for (let i = 0; i < json.articles.length; i++){
