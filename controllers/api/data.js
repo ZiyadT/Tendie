@@ -1,4 +1,5 @@
 require('dotenv').config()
+const twelvedata = require('twelvedata')
 
 module.exports = {
     retrieve
@@ -11,16 +12,25 @@ async function retrieve(req, res){
     let news = []
     let finalResult = {}
     
-    let response = await fetch(`https://api.twelvedata.com/time_series?symbol=${req.body.stock}&interval=1day&apikey=${process.env.STOCK_API_KEY}`)
-    let json = await response.json();
+    let response = await fetch(`https://api.twelvedata.com/complex_data?apikey=${process.env.STOCK_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({symbols: ['AAPL'], intervals:["1day", "1week", "1month"], methods: ["time_series"]})
+    });
+    let json = await response.json()
 
-    for(let i = 0; i < json.values.length; i++){
+    for(let i = 0; i < json['data'].length; i++){
+        let emptyArr = []
+        for (let j = 0; j < json['data'][i].values.length; j++){
+            let current = json['data'][i].values[j]
             let emptyObj = {}
-            emptyObj.date = json.values[i].datetime.split(" ")[0]
-            emptyObj.value = json.values[i].close
-            timeSeries.push(emptyObj)
+            emptyObj.date = current.datetime
+            emptyObj.value = current.close
+            emptyArr.push(emptyObj)
+        }
+        timeSeries.push(emptyArr.reverse())
+        finalResult['timeSeries'] = timeSeries
     }
-    finalResult['timeSeries'] = timeSeries.reverse()
 
     response = await fetch(`https://api.twelvedata.com/quote?symbol=${req.body.stock}&apikey=${process.env.STOCK_API_KEY}`)
     json = await response.json();
@@ -52,4 +62,27 @@ async function retrieve(req, res){
     finalResult['news'] = news
 
     res.status(200).json(finalResult)
+}
+
+async function test(){
+    let fetchResponse = await fetch(`https://api.twelvedata.com/complex_data?apikey=${process.env.STOCK_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({symbols: ['AAPL'], intervals:["1day", "1week", "1month"], methods: ["time_series"]})
+    });
+    let json = await fetchResponse.json()
+    // for(let i = 0; i < data['data'].length; i++){
+    //     let emptyArr = []
+    //     for (let j = 0; j < data['data'][i].values.length; j++){
+    //         let current = data['data'][i].values[j]
+    //         let emptyObj = {}
+    //         emptyObj.date = current.datetime
+    //         emptyObj.value = current.close
+    //         emptyArr.push(emptyObj)
+    //     }
+    //     timeSeries.push(emptyArr.reverse())
+    //     finalResult['timeSeries'] = timeSeries
+    //     console.log(timeSeries)
+    // }
+    console.log(json['data'][0].values)
 }

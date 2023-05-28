@@ -18,6 +18,11 @@
     background-color: #534131;
 }
 
+.active{
+    background-color: #FFE1C6;
+    color: #201A16;
+}
+
 .main-line{
     border-color: #FFD9B6;
 }

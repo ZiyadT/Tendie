@@ -9,17 +9,18 @@ import search from '../images/search.png'
 
 export default function Dashboard(props){
     const [currentStock, setCurrentStock] = useState("")
+    const [filter, setFilter] = useState("1day")
     const [headerData, setHeaderData] = useState({name: '-', ticker: '-'})
-    const [timeSeries, setTimeSeries] = useState([{date: '0', value: '0'}])
+    const [timeSeries, setTimeSeries] = useState(null)
     const [stats, setStats] = useState({
-        open: "value",
-        high: "value",
-        low: "value",
-        volume: "value",
-        prevClose: "value",
-        fiftytwolow: "value",
-        fiftytwohigh: "value",
-        change: "value"
+        open: "",
+        high: "",
+        low: "",
+        volume: "",
+        prevClose: "",
+        fiftytwolow: "",
+        fiftytwohigh: "",
+        change: ""
     })
     const [news, setNews] = useState(null)
 
@@ -29,7 +30,7 @@ export default function Dashboard(props){
             let fetchResponse = await fetch("/api/data/retrieve", {
               method: "POST",
               headers: { "Content-Type": "application/json", "Authorization": 'Bearer: ' + jwt },
-              body: JSON.stringify({ stock: currentStock })
+              body: JSON.stringify({ stock: currentStock, filter: filter })
             });
             let serverResponse = await fetchResponse.json()
             console.log("Success:", serverResponse)
@@ -58,22 +59,18 @@ export default function Dashboard(props){
                     <div className="text-5xl cursor-default font-semibold"><span className="logo-color">Tendie</span>.</div>
                     <img src={logout} className="h-8 w-auto cursor-pointer" onClick={handleLogOut}></img>
                 </div>
-                <div className="w-5/6 mx-auto flex justify-between">
-                    <input type="text" name="searchStock" placeholder="Search stock..." className="w-full border-b bg-transparent main-line focus:outline-none text-color" onChange={handleChange}></input>
+                <div className="w-5/6 mx-auto flex justify-between sm:justify-normal">
+                    <input type="text" name="searchStock" placeholder="Search stock..." className="w-full border-b bg-transparent main-line focus:outline-none text-color sm:w-1/4" onChange={handleChange}></input>
                     <img src={search} className="w-10 h-auto cursor-pointer" onClick={searchStock}></img>
                 </div>
-                <div className="flex justify-between w-5/6 mx-auto mt-2">
-                    <p className={`${headerData.name.length + headerData.ticker.length >= 21 ? "text-sm" : "text-xl"} sm:text-xl font-medium logo-color mx-5`}>{headerData.name} ({headerData.ticker})</p>
-                    <div className="flex">
-                        <div className="text-sm mx-1 w-6 h-6 border rounded-md logo-color font-medium hover:">D</div>
-                        <div className="text-sm mx-1 w-6 h-6 border rounded-md logo-color font-medium">M</div>
-                        <div className="text-sm mr-5 ml-1 w-6 h-6 border rounded-md logo-color font-medium">Y</div>
-                    </div>
-                </div>
                 <div className="w-full mx-auto h-1/2 sm:w-5/6">
-                    <Chart key={headerData.name} data={timeSeries} />
+                {
+                    timeSeries ? 
+                    <Chart key={headerData.name} data={timeSeries} header={headerData} /> :
+                    ""
+                }
                 </div> 
-                <div className="w-full h-1/5 mx-auto sm:w-5/6">
+                <div className="w-full h-1/5 mx-auto sm:my-10 sm:w-5/6">
                     <KeyStats data={stats} />
                 </div>
             </div>
