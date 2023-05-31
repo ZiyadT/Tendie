@@ -1,12 +1,11 @@
 import { useState } from "react";
-import {newsData} from '../sample_data/newssample'
 import './components.css';
 
 export default function NewsCard(props) {
     
     return (
         <a href={props.data.url} target="_blank">
-            <div className="w-5/6 mx-auto secondary-background mt-5">
+            <div className="w-5/6 mx-auto secondary-background mt-5 opacity-70 transition ease-in-out duration-300 hover:opacity-100">
                 <div className="w-full text-lg logo-color">{props.data.title}</div>
                 <img 
                     src={props.data.urlToImage}

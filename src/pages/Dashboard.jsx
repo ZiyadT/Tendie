@@ -3,13 +3,12 @@ import React, {useState} from "react"
 import Chart from '../components/Chart'
 import KeyStats from '../components/KeyStats'
 import NewsCard from '../components/NewsCard'
-import { generalData } from '../sample_data/stocksample'
 import logout from '../images/logout.png'
 import search from '../images/search.png'
 
 export default function Dashboard(props){
     const [currentStock, setCurrentStock] = useState("")
-    const [filter, setFilter] = useState("1day")
+    const [error, setError] = useState(false)
     const [headerData, setHeaderData] = useState({name: '-', ticker: '-'})
     const [timeSeries, setTimeSeries] = useState(null)
     const [stats, setStats] = useState({
@@ -30,16 +29,22 @@ export default function Dashboard(props){
             let fetchResponse = await fetch("/api/data/retrieve", {
               method: "POST",
               headers: { "Content-Type": "application/json", "Authorization": 'Bearer: ' + jwt },
-              body: JSON.stringify({ stock: currentStock, filter: filter })
+              body: JSON.stringify({ stock: currentStock })
             });
-            let serverResponse = await fetchResponse.json()
-            console.log("Success:", serverResponse)
-            setHeaderData(serverResponse.general)
-            setTimeSeries(serverResponse.timeSeries)
-            setStats(serverResponse.keyMetrics)
-            setNews(serverResponse.news)
+            if (fetchResponse.ok){
+                let serverResponse = await fetchResponse.json()
+                console.log("Success:", serverResponse)
+                setHeaderData(serverResponse.general)
+                setTimeSeries(serverResponse.timeSeries)
+                setStats(serverResponse.keyMetrics)
+                setNews(serverResponse.news)
+                setError(false)
+            }
+            else {
+                throw new Error("Stock not found")
+            }
         } catch (err) {
-            console.error("Error:", err)
+            setError(true)
         }
     }
 
@@ -57,11 +62,11 @@ export default function Dashboard(props){
             <div className="sm:w-3/4">
                 <div className="flex w-5/6 h-1/6 mx-auto my-10 justify-between items-center sm:my-0">
                     <div className="text-5xl cursor-default font-semibold"><span className="logo-color">Tendie</span>.</div>
-                    <img src={logout} className="h-8 w-auto cursor-pointer" onClick={handleLogOut}></img>
+                    <img src={logout} className="h-8 w-auto cursor-pointer transition ease-in-out duration-300 hover:opacity-70" onClick={handleLogOut}></img>
                 </div>
                 <div className="w-5/6 mx-auto flex justify-between sm:justify-normal">
                     <input type="text" name="searchStock" placeholder="Search stock..." className="w-full border-b bg-transparent main-line focus:outline-none text-color sm:w-1/4" onChange={handleChange}></input>
-                    <img src={search} className="w-10 h-auto cursor-pointer" onClick={searchStock}></img>
+                    <img src={search} className="w-10 h-auto cursor-pointer transition ease-in-out duration-300 hover:opacity-70" onClick={searchStock}></img>
                 </div>
                 <div className="w-full mx-auto h-1/2 sm:w-5/6">
                 {
@@ -79,7 +84,7 @@ export default function Dashboard(props){
                 {
                     news ? 
                     news.map((article) => (
-                        <NewsCard key={article.title} data={article}></NewsCard>
+                        <NewsCard key={article.url} data={article}></NewsCard>
                     )) : ""
                 }
             </div>

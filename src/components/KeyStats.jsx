@@ -1,5 +1,4 @@
 import { useState } from "react";
-import {stockData} from '../sample_data/stocksample'
 import './components.css';
 
 export default function KeyStats(props) {

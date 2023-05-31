@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
 import { AreaChart, ResponsiveContainer, Tooltip, Area, XAxis, YAxis } from 'recharts'
-import {timeSeries} from '../sample_data/stocksample'
 import './components.css';
 
 export default function Chart(props) {
     const [data, setData] = useState(props.data[0])
     const [filter, setFilter] = useState('1day')
-
-    useEffect(() => {
-        console.log(data)
-    })
 
     const handleFilterChange = async (evt) => {
         const legend = {
@@ -29,18 +24,18 @@ export default function Chart(props) {
         else {
             setData(props.data[2])
         }
-        
+
         setFilter(legend[evt.target.textContent])
     }
 
     return (
         <div>
             <div className="flex justify-between w-5/6 mx-auto mt-2">
-                <p className={`${props.header.name.length + props.header.ticker.length >= 21 ? "text-sm" : "text-xl"} sm:text-xl font-medium logo-color mx-5`}>{props.header.name} ({props.header.ticker})</p>
+                <p className={`${props.header.name.length + props.header.ticker.length >= 21 ? "text-sm" : "text-xl"} sm:text-xl font-medium logo-color mx-5`}>{props.header.name} ({props.header.ticker}) - ${Number(props.header.price).toFixed(2)}</p>
                 <div className="flex">
-                    <div className={"text-sm mx-1 w-6 h-6 border rounded-md main-line logo-color font-medium " + (filter == "1day" ? "active" : "")} onClick={handleFilterChange}>D</div>
-                    <div className={"text-sm mx-1 w-6 h-6 border rounded-md main-line logo-color font-medium " + (filter == "1week" ? "active" : "")} onClick={handleFilterChange}>W</div>
-                    <div className={"text-sm mx-1 w-6 h-6 border rounded-md main-line logo-color font-medium " + (filter == "1month" ? "active" : "")} onClick={handleFilterChange}>M</div>
+                    <div className={"text-sm mx-1 w-6 h-6 border rounded-md main-line cursor-pointer logo-color font-medium transition ease-in-out " + (filter == "1day" ? "active" : "hover:bg-orange-300 duration-300")} onClick={handleFilterChange}>D</div>
+                    <div className={"text-sm mx-1 w-6 h-6 border rounded-md main-line cursor-pointer logo-color font-medium transition ease-in-out " + (filter == "1week" ? "active" : "hover:bg-orange-300 duration-300")} onClick={handleFilterChange}>W</div>
+                    <div className={"text-sm mx-1 w-6 h-6 border rounded-md main-line cursor-pointer logo-color font-medium transition ease-in-out " + (filter == "1month" ? "active" : "hover:bg-orange-300 duration-300")} onClick={handleFilterChange}>M</div>
                 </div>
             </div>
             <ResponsiveContainer width="99%" height={400}>
