@@ -2,7 +2,8 @@ require('dotenv').config()
 const twelvedata = require('twelvedata')
 
 module.exports = {
-    retrieve
+    retrieve,
+    getStocks
 }
 
 async function retrieve(req, res){
@@ -72,4 +73,26 @@ async function retrieve(req, res){
     catch(err){
         res.status(400).json(err)
     }
+}
+
+async function getStocks(req, res){
+    try{
+        let response = await fetch(`https://api.twelvedata.com/stocks`);
+        let json = await response.json()
+        const exchanges = ['NASDAQ', 'NYSE', 'OTC']
+        let finalResult = []
+        for (let i = 0; i < json.data.length; i++){
+            if (exchanges.includes(json.data[i].exchange)){
+                finalResult.push({
+                    name: json.data[i].name,
+                    symbol: json.data[i].symbol,
+                    exchange: json.data[i].exchange
+                })
+            }
+        }
+        res.status(200).json(finalResult)
+    }
+    catch(err){
+        res.status(400).json(err)
+    }    
 }
