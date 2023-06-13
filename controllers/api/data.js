@@ -1,5 +1,4 @@
 require('dotenv').config()
-const twelvedata = require('twelvedata')
 
 module.exports = {
     retrieve,

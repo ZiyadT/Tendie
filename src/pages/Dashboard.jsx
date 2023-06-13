@@ -5,8 +5,6 @@ import KeyStats from '../components/KeyStats'
 import NewsCard from '../components/NewsCard'
 import Search from '../components/Search'
 import logout from '../images/logout.png'
-import search from '../images/search.png'
-import CustomScroll from 'react-custom-scroll';
 
 export default function Dashboard(props){
     const [currentStock, setCurrentStock] = useState("")
@@ -38,7 +36,6 @@ export default function Dashboard(props){
             });
             if (fetchResponse.ok){
                 let serverResponse = await fetchResponse.json()
-                console.log("Success:", serverResponse)
                 setHeaderData(serverResponse.general)
                 setTimeSeries(serverResponse.timeSeries)
                 setStats(serverResponse.keyMetrics)
@@ -51,10 +48,6 @@ export default function Dashboard(props){
         } catch (err) {
             setError(true)
         }
-    }
-
-    const handleChange = async (evt) => {
-        setCurrentStock(evt.target.value)
     }
 
     const handleLogOut = async () => {
@@ -96,7 +89,13 @@ export default function Dashboard(props){
                     <div className="text-5xl cursor-default font-semibold"><span className="logo-color">Tendie</span>.</div>
                     <img src={logout} className="h-8 w-auto cursor-pointer transition ease-in-out duration-300 hover:opacity-70" onClick={handleLogOut}></img>
                 </div>
-                <Search searchStock={searchStock} stockList={stockList} setLocalList={setLocalList} currentStock={currentStock} handleChange={handleChange} localList={localList}/>
+                <Search 
+                    searchStock={searchStock} 
+                    stockList={stockList} 
+                    setLocalList={setLocalList} 
+                    currentStock={currentStock}
+                    setCurrentStock={setCurrentStock} 
+                    localList={localList}/>
                 <div className="w-full mx-auto h-1/2 sm:w-5/6">
                     {
                         timeSeries ? 
