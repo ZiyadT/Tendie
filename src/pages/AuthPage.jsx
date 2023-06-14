@@ -16,7 +16,7 @@ export default function AuthPage(props) {
                         Stock visualization tool with up-to-date news
                     </div> 
                     <div className="py-5 text-color">
-                        Designed and built by Ziyad Tahlilkar. Powered by NewsAPI.
+                        Designed and built by Chap. Powered by NewsAPI.
                     </div>
                 </div>
                 <div className="h-1/2 sm:w-1/3 sm:border-l sm:main-line sm:h-full">
