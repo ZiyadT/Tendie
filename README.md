@@ -1,6 +1,7 @@
 # Tendie
 
-Simple yet practical app for monitoring weather on different parts of the globe
+Intuitive stock visualization tool presenting comprehensive line charts showcasing historical and real-time data for any U.S. security. Integrated the TwelveData API to fetch stock data and the 
+NewsAPI to retrieve recent news articles about the company
 
 ## Technologies Used
 
