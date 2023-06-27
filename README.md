@@ -10,5 +10,5 @@ NewsAPI to retrieve recent news articles about the company
 * Express and NodeJS
 * MongoDB and Mongoose
 
-## Getting Started
+## Try it yourself
 * EC2 Deployment: http://54.173.185.222/
