@@ -41,7 +41,7 @@ export default function LoginForm(props) {
   };
 
   return (
-      <form autoComplete="off" onSubmit={handleSubmit} className="sm:my-24">
+      <form autoComplete="off" onSubmit={handleSubmit} className="md:my-24">
         <div className='my-3 mx-auto w-4/5 text-left'>
           <div className='text-lg text-color'>E-mail</div>
           <input type="text" name="email" value={email} onChange={handleChangeEmail} required className='textbox-fill w-full px-1 focus:outline-0' />

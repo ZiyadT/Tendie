@@ -36,6 +36,7 @@ export default function Dashboard(props){
             });
             if (fetchResponse.ok){
                 let serverResponse = await fetchResponse.json()
+                console.log("Success: ", serverResponse)
                 setHeaderData(serverResponse.general)
                 setTimeSeries(serverResponse.timeSeries)
                 setStats(serverResponse.keyMetrics)
@@ -65,7 +66,6 @@ export default function Dashboard(props){
                 })
                 if (fetchResponse.ok){
                     let serverResponse = await fetchResponse.json()
-                    console.log("Success:", serverResponse)
                     setStockList(serverResponse)
                     setError(false)
                 }
