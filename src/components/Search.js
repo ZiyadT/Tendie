@@ -16,6 +16,7 @@ export default function Search(props) {
         props.setLocalList(similar)
     }, [props.currentStock])
 
+    
     return (
        <div className="mx-auto w-5/6 relative">
             <form className="flex justify-between sm:justify-start sm:w-1/4" onSubmit={props.searchStock}>
